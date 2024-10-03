@@ -9,14 +9,9 @@ extends Control
 @onready var bottom_nav = $MainLayout/BottomNav/HBoxContainer
 @onready var advance_week_button = $MainLayout/BottomNav/AdvanceWeekBtn
 
-
-# Game state variables
-var current_week = 1
-var current_year = 2024
-var days_left = 7
-var money = 10000
-var reputation = 68
-
+#Reference to managers
+var game_manager
+var turn_manager
 
 # Dictionary to hold references to menu scenes
 var views = {
@@ -37,8 +32,8 @@ func _ready():
 		button.connect("pressed", Callable(self, "_on_nav_button_pressed").bind(button.name))
 
 	advance_week_button.connect("pressed", Callable(self, "_on_advance_week_pressed"))
-
-	# Initialize UI
+	
+	#Initialize UI
 	update_ui()
 	show_view("Dashboard")
 
@@ -58,20 +53,13 @@ func show_view(view_name):
 		print("View not found: ", view_name)
 
 func update_ui():
-	date_label.text = "Week %d, %d" % [current_week, current_year]
-	days_left_label.text = "Days Left: %d" % days_left
-	money_label.text = "Funds: %d" % money
-	reputation_label.text = "Rep: %d%%" % reputation
+	date_label.text = "Week %d, %d" % [TurnManager.current_week, TurnManager.current_year]
+	days_left_label.text = "Days Left: %d" % TurnManager.days_left
+	money_label.text = "Funds: %d" % GameManager.funds
+	reputation_label.text = "Rep: %d%%" % GameManager.reputation
 
 func _on_advance_week_pressed():
-	advance_week()
-
-func advance_week():
-	current_week += 1
-	days_left = 7
-	if current_week > 52:
-		current_week = 1
-		current_year += 1
+	TurnManager.advance_week()
 
 	# TODO: Implement week-based logic (costs, revenues, reputation change, etc.)
 
@@ -79,8 +67,8 @@ func advance_week():
 
 
 func take_action(action_days):
-	if action_days <= days_left:
-		days_left -= action_days
+	if action_days <= TurnManager.days_left:
+		TurnManager.days_left -= action_days
 		update_ui()
 		return true
 	return false

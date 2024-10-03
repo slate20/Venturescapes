@@ -1,4 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bf46u508bknk"]
+[gd_scene load_steps=11 format=3 uid="uid://bf46u508bknk"]
+
+[ext_resource type="Script" path="res://Scripts/dashboard.gd" id="1_jo86t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grsgw"]
 bg_color = Color(1, 1, 1, 1)
@@ -89,6 +91,31 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iccu6"]
+bg_color = Color(0.834614, 0.834614, 0.834614, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.370364, 0.370365, 0.370364, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8vrtt"]
+bg_color = Color(0.557274, 0.743826, 0.969857, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.359069, 0.359069, 0.359069, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
 [node name="Dashboard" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -96,11 +123,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 56.0
 offset_top = 32.0
-offset_right = -56.0
+offset_right = -8.0
 offset_bottom = -124.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_vertical_guides_ = [56.0, 1544.0]
+script = ExtResource("1_jo86t")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -156,10 +183,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 25.0
-offset_top = 104.0
-offset_right = -23.0
-offset_bottom = 2.0
+offset_left = 27.0
+offset_top = 94.0
+offset_right = -27.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_unselected_color = Color(0.325441, 0.325441, 0.325441, 1)
@@ -172,18 +198,20 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_hruqh")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_6havp")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_d6jpg")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_fvuwe")
-current_tab = 0
+current_tab = 1
 
 [node name="Overview" type="Control" parent="TabContainer"]
+visible = false
+layout_direction = 1
 layout_mode = 2
 metadata/_tab_index = 0
 
 [node name="WeeklySummary" type="Panel" parent="TabContainer/Overview"]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 25.0
-offset_right = 521.0
-offset_bottom = 288.0
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 523.0
+offset_bottom = 348.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_qbivx")
 
 [node name="Title" type="Label" parent="TabContainer/Overview/WeeklySummary"]
@@ -207,6 +235,7 @@ theme_override_font_sizes/font_size = 24
 text = "Revenue: +$5,000"
 
 [node name="Expenses" type="Label" parent="TabContainer/Overview/WeeklySummary"]
+layout_mode = 0
 offset_left = 21.0
 offset_top = 113.0
 offset_right = 223.0
@@ -216,6 +245,7 @@ theme_override_font_sizes/font_size = 24
 text = "Expenses: $3,000"
 
 [node name="NetProfit" type="Label" parent="TabContainer/Overview/WeeklySummary"]
+layout_mode = 0
 offset_left = 21.0
 offset_top = 153.0
 offset_right = 223.0
@@ -224,17 +254,124 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "Net Profit: $2,000"
 
-[node name="Revenue2" type="Label" parent="TabContainer/Overview/WeeklySummary"]
-visible = false
-offset_left = 21.0
-offset_top = 193.0
-offset_right = 223.0
-offset_bottom = 227.0
+[node name="Pipeline" type="Panel" parent="TabContainer/Overview"]
+layout_mode = 2
+offset_left = 571.0
+offset_top = 48.0
+offset_right = 1046.0
+offset_bottom = 348.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qbivx")
+
+[node name="Title" type="Label" parent="TabContainer/Overview/Pipeline"]
+layout_mode = 2
+offset_left = 16.0
+offset_top = 7.0
+offset_right = 276.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+text = "Pipeline"
+
+[node name="Container" type="Control" parent="TabContainer/Overview/Pipeline"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 19.0
+offset_top = 66.0
+offset_right = -10.0
+offset_bottom = 113.0
+grow_horizontal = 2
+
+[node name="Task" type="Label" parent="TabContainer/Overview/Pipeline/Container"]
+layout_mode = 1
+offset_right = 253.0
+offset_bottom = 34.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
-text = "Revenue: +$5,000"
+text = "Task in progress"
+
+[node name="ProgressBar" type="ProgressBar" parent="TabContainer/Overview/Pipeline/Container"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -179.0
+offset_top = -18.5
+offset_right = -12.0
+offset_bottom = 8.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.180005, 0.180005, 0.180005, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_iccu6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8vrtt")
+value = 60.0
+
+[node name="YTDSummary" type="Panel" parent="TabContainer/Overview"]
+layout_mode = 2
+offset_left = 48.0
+offset_top = 397.0
+offset_right = 1046.0
+offset_bottom = 739.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qbivx")
+
+[node name="Title" type="Label" parent="TabContainer/Overview/YTDSummary"]
+layout_mode = 2
+offset_left = 16.0
+offset_top = 7.0
+offset_right = 276.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+text = "YTD Summary"
+
+[node name="NewsAlerts" type="Panel" parent="TabContainer/Overview"]
+layout_mode = 2
+offset_left = 1094.0
+offset_top = 48.0
+offset_right = 1756.0
+offset_bottom = 739.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qbivx")
+
+[node name="Title" type="Label" parent="TabContainer/Overview/NewsAlerts"]
+layout_mode = 2
+offset_left = 16.0
+offset_top = 7.0
+offset_right = 276.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+text = "News & Alerts"
 
 [node name="Opportunities" type="Control" parent="TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+
+[node name="DirectRequests" type="Panel" parent="TabContainer/Opportunities"]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 54.0
+offset_right = 701.0
+offset_bottom = 721.0
+
+[node name="RequestsList" type="VBoxContainer" parent="TabContainer/Opportunities/DirectRequests"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.0
+offset_top = -261.5
+offset_right = 262.0
+offset_bottom = 296.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarketplaceJobs" type="Panel" parent="TabContainer/Opportunities"]
+visible = false
+layout_mode = 0
+offset_left = 1043.0
+offset_right = 1083.0
+offset_bottom = 40.0
