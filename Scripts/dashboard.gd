@@ -4,9 +4,9 @@ extends Control
 @onready var company_name_label = $CompanyInfo/CompanyName
 @onready var business_type_label = $CompanyInfo/BusinessType
 @onready var weekly_summary = $TabContainer/Overview/WeeklySummary
-@onready var pipeline = $TabContainer/Overview/Pipeline
-@onready var news_alerts = $TabContainer/Overview/NewsAlerts
-@onready var ytd_summary = $TabContainer/Overview/YTDSummary
+@onready var pipeline = $TabContainer/Overview/Pipeline/Container
+@onready var news_alerts = $TabContainer/Overview/NewsAlerts/VBoxContainer
+@onready var ytd_summary = $TabContainer/Overview/YTDSummary/VBoxContainer
 @onready var direct_requests_list = $TabContainer/Opportunities/DirectRequests/RequestsList
 @onready var marketplace_jobs_list = $TabContainer/Opportunities/MarketplaceJobs
 @onready var tab_container = $TabContainer
@@ -48,13 +48,42 @@ func update_pipeline():
 	for child in pipeline.get_children():
 		child.queue_free()
 
-	# Add new progress bars for each active service job
+	# Add new titles and progress bars for each active service job
 	for job in ServiceSystems.active_service_jobs:
+		var container = HBoxContainer.new()
+		container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+		var title_label = Label.new()
+		title_label.text = job.opportunity.title
+		title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		title_label.add_theme_color_override("font_color", Color.BLACK)
+		container.add_child(title_label)
+
 		var progress_bar = ProgressBar.new()
 		progress_bar.max_value = 1.0
 		progress_bar.value = job.progress
 		progress_bar.set_custom_minimum_size(Vector2(200, 20))
-		pipeline.add_child(progress_bar)
+		progress_bar.size_flags_horizontal = Control.SIZE_SHRINK_END
+		
+		var style_box = StyleBoxFlat.new()
+		style_box.bg_color = Color("#8ebef7")
+		style_box.corner_radius_top_left = 4
+		style_box.corner_radius_top_right = 4
+		style_box.corner_radius_bottom_left = 4
+		style_box.corner_radius_bottom_right = 4
+		progress_bar.add_theme_stylebox_override("fill", style_box)
+		
+		var background_style = StyleBoxFlat.new()
+		background_style.bg_color = Color("#d5d5d5")
+		background_style.corner_radius_top_left = 4
+		background_style.corner_radius_top_right = 4
+		background_style.corner_radius_bottom_left = 4
+		background_style.corner_radius_bottom_right = 4
+		progress_bar.add_theme_stylebox_override("background", background_style)
+		
+		container.add_child(progress_bar)
+
+		pipeline.add_child(container)
 
 func update_news_alerts():
 	# Remove all existing children from the news alerts
@@ -80,11 +109,20 @@ func update_opportunities_list():
 		child.queue_free()
 
 	# Add new list items for each opportunity
-	for opp in ServiceSystems.opportunities:
-		var item_text = "%s - Payout: $%d - Estimated Time: %d weeks - Deadline: Week %d" % [opp.title, opp.payout, opp.time_estimate, opp.deadline]
+	for i in range(ServiceSystems.opportunities.size()):
+		var opp = ServiceSystems.opportunities[i]
+		var item_container = HBoxContainer.new()
+		
 		var label = Label.new()
-		label.text = item_text
-		direct_requests_list.add_child(label)
+		label.text = "%s - Payout: $%d - Estimated Time: %d weeks - Deadline: Week %d" % [opp.title, opp.payout, opp.time_estimate, opp.deadline]
+		item_container.add_child(label)
+		
+		var accept_button = Button.new()
+		accept_button.text = "Accept"
+		accept_button.connect("pressed", Callable(self, "_on_accept_request").bind(i))
+		item_container.add_child(accept_button)
+		
+		direct_requests_list.add_child(item_container)
 
 	# TODO: Add marketplace jobs list
 
