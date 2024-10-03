@@ -1,0 +1,240 @@
+[gd_scene load_steps=8 format=3 uid="uid://bf46u508bknk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grsgw"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6kdu"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hruqh"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.0862745)
+shadow_size = 2
+shadow_offset = Vector2(-2, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6havp"]
+content_margin_left = 16.0
+content_margin_top = 0.0
+content_margin_right = 16.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6jpg"]
+content_margin_left = 16.0
+content_margin_top = 0.0
+content_margin_right = 16.0
+content_margin_bottom = 0.0
+bg_color = Color(0.894922, 0.894922, 0.894922, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fvuwe"]
+content_margin_left = 16.0
+content_margin_top = 0.0
+content_margin_right = 16.0
+content_margin_bottom = 0.0
+bg_color = Color(0.817521, 0.817521, 0.817521, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbivx"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="Dashboard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 56.0
+offset_top = 32.0
+offset_right = -56.0
+offset_bottom = -124.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_vertical_guides_ = [56.0, 1544.0]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.894922, 0.894922, 0.894922, 1)
+
+[node name="CompanyInfo" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 24.0
+offset_top = 10.0
+offset_right = -24.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_grsgw")
+
+[node name="ColorRect" type="ColorRect" parent="CompanyInfo"]
+layout_mode = 2
+offset_right = 1488.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.894922, 0.894922, 0.894922, 1)
+
+[node name="CompanyName" type="Label" parent="CompanyInfo"]
+layout_mode = 2
+offset_left = 13.0
+offset_top = 4.0
+offset_right = 1501.0
+offset_bottom = 38.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "CompanyName, LLC"
+
+[node name="BusinessType" type="Label" parent="CompanyInfo"]
+layout_mode = 2
+offset_left = 14.0
+offset_top = 37.0
+offset_right = 1502.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(0.385493, 0.385492, 0.385492, 1)
+theme_override_font_sizes/font_size = 20
+text = "BusinessType
+"
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 104.0
+offset_right = -23.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_unselected_color = Color(0.325441, 0.325441, 0.325441, 1)
+theme_override_colors/font_hovered_color = Color(0.230315, 0.230315, 0.230315, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_constants/side_margin = 10
+theme_override_font_sizes/font_size = 24
+theme_override_styles/tab_focus = SubResource("StyleBoxFlat_b6kdu")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hruqh")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_6havp")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_d6jpg")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_fvuwe")
+current_tab = 0
+
+[node name="Overview" type="Control" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="WeeklySummary" type="Panel" parent="TabContainer/Overview"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 25.0
+offset_right = 521.0
+offset_bottom = 288.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qbivx")
+
+[node name="Title" type="Label" parent="TabContainer/Overview/WeeklySummary"]
+layout_mode = 2
+offset_left = 16.0
+offset_top = 7.0
+offset_right = 276.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+text = "Weekly Summary"
+
+[node name="Revenue" type="Label" parent="TabContainer/Overview/WeeklySummary"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 72.0
+offset_right = 223.0
+offset_bottom = 106.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Revenue: +$5,000"
+
+[node name="Expenses" type="Label" parent="TabContainer/Overview/WeeklySummary"]
+offset_left = 21.0
+offset_top = 113.0
+offset_right = 223.0
+offset_bottom = 147.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Expenses: $3,000"
+
+[node name="NetProfit" type="Label" parent="TabContainer/Overview/WeeklySummary"]
+offset_left = 21.0
+offset_top = 153.0
+offset_right = 223.0
+offset_bottom = 187.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Net Profit: $2,000"
+
+[node name="Revenue2" type="Label" parent="TabContainer/Overview/WeeklySummary"]
+visible = false
+offset_left = 21.0
+offset_top = 193.0
+offset_right = 223.0
+offset_bottom = 227.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Revenue: +$5,000"
+
+[node name="Opportunities" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
