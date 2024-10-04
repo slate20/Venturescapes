@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bf46u508bknk"]
+[gd_scene load_steps=12 format=3 uid="uid://bf46u508bknk"]
 
 [ext_resource type="Script" path="res://Scripts/dashboard.gd" id="1_jo86t"]
 
@@ -13,6 +13,10 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_x0pfh"]
+font_size = 36
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6kdu"]
 bg_color = Color(1, 1, 1, 1)
@@ -150,6 +154,15 @@ offset_bottom = 80.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_grsgw")
 
+[node name="ViewTitle" type="Label" parent="CompanyInfo"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 9.0
+offset_right = 213.0
+offset_bottom = 59.0
+text = "Dashboard"
+label_settings = SubResource("LabelSettings_x0pfh")
+
 [node name="ColorRect" type="ColorRect" parent="CompanyInfo"]
 layout_mode = 2
 offset_right = 1488.0
@@ -159,24 +172,26 @@ color = Color(0.894922, 0.894922, 0.894922, 1)
 
 [node name="CompanyName" type="Label" parent="CompanyInfo"]
 layout_mode = 2
-offset_left = 13.0
+offset_left = 1374.0
 offset_top = 4.0
-offset_right = 1501.0
+offset_right = 1782.0
 offset_bottom = 38.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "CompanyName, LLC"
+horizontal_alignment = 2
 
 [node name="BusinessType" type="Label" parent="CompanyInfo"]
 layout_mode = 2
-offset_left = 14.0
-offset_top = 37.0
-offset_right = 1502.0
-offset_bottom = 65.0
+offset_left = 1319.0
+offset_top = 36.0
+offset_right = 1781.0
+offset_bottom = 64.0
 theme_override_colors/font_color = Color(0.385493, 0.385492, 0.385492, 1)
 theme_override_font_sizes/font_size = 20
 text = "BusinessType
 "
+horizontal_alignment = 2
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
@@ -314,6 +329,7 @@ theme_override_font_sizes/font_size = 31
 text = "YTD Summary"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Overview/YTDSummary"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 64.0
 offset_right = 975.0
