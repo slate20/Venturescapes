@@ -9,10 +9,6 @@ extends Control
 @onready var bottom_nav = $MainLayout/BottomNav/HBoxContainer
 @onready var advance_week_button = $MainLayout/BottomNav/AdvanceWeekBtn
 
-#Reference to managers
-var game_manager
-var turn_manager
-
 # Dictionary to hold references to menu scenes
 var views = {
 	"Dashboard": preload("res://Scenes/Dashboard.tscn"),
@@ -24,8 +20,6 @@ var views = {
 	"Assets": preload("res://Scenes/Assets.tscn"),
 }
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	# Connect the navigation buttons
 	for button in bottom_nav.get_children():
@@ -55,8 +49,8 @@ func show_view(view_name):
 func update_ui():
 	date_label.text = "Week %d, %d" % [TurnManager.current_week, TurnManager.current_year]
 	days_left_label.text = "Days Left: %d" % TurnManager.days_left
-	money_label.text = "Funds: %d" % GameManager.funds
-	reputation_label.text = "Rep: %d%%" % GameManager.reputation
+	money_label.text = "Funds: %d" % GameManager.player.current_funds
+	reputation_label.text = "Rep: %d%%" % GameManager.get_active_business().reputation
 
 func _on_advance_week_pressed():
 	TurnManager.advance_week()

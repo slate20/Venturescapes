@@ -56,12 +56,20 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="Company" type="Label" parent="Setup/VBoxContainer"]
+[node name="PlayerName" type="Label" parent="Setup/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Company Name:"
+text = "Player Name:"
 
-[node name="CompanyName" type="LineEdit" parent="Setup/VBoxContainer"]
+[node name="PlayerNameInput" type="LineEdit" parent="Setup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Business" type="Label" parent="Setup/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Business Name:"
+
+[node name="BusinessName" type="LineEdit" parent="Setup/VBoxContainer"]
 layout_mode = 2
 
 [node name="BusinessType" type="Label" parent="Setup/VBoxContainer"]
@@ -69,7 +77,42 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Business Type:"
 
-[node name="BusinessSelect" type="OptionButton" parent="Setup/VBoxContainer"]
+[node name="BusinessTypeSelect" type="HBoxContainer" parent="Setup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Manufacturing" type="CheckBox" parent="Setup/VBoxContainer/BusinessTypeSelect"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.0885599, 0.0885599, 0.0885599, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Manufacturing"
+
+[node name="Retail" type="CheckBox" parent="Setup/VBoxContainer/BusinessTypeSelect"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.0885599, 0.0885599, 0.0885599, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Retail"
+
+[node name="Service" type="CheckBox" parent="Setup/VBoxContainer/BusinessTypeSelect"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.0885599, 0.0885599, 0.0885599, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Service"
+
+[node name="Industry" type="Label" parent="Setup/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Industry:"
+
+[node name="IndustrySelect" type="OptionButton" parent="Setup/VBoxContainer"]
 layout_mode = 2
 
 [node name="StartButton" type="Button" parent="Setup/VBoxContainer"]

@@ -5,6 +5,9 @@ const Data = preload("res://Scripts/Data.gd")
 var days_left = 7
 var current_week = 1
 var current_year = 2024
+var current_date: String:
+	get:
+		return "Week %d, %d" % [current_week, current_year]
 var weekly_revenue = 0
 var weekly_expense = 0
 var weekly_profit = 0
@@ -39,6 +42,10 @@ func advance_week():
 	report.reputation_change = 0
 	
 	GameManager.weekly_reports.append(report)
+
+	weekly_revenue = 0
+	weekly_expense = 0
+	weekly_profit = 0
 	
 	# Reset completed projects
 	ServiceSystems.completed_service_jobs.clear()
@@ -50,12 +57,3 @@ func advance_week():
 		dashboard.update_dashboard()
 	else:
 		print("Dashboard not found")
-
-func get_current_state():
-	return {
-		"company": GameManager.company,
-		"opportunities": ServiceSystems.opportunities,
-		"active_jobs": ServiceSystems.active_service_jobs,
-		"completed_jobs": ServiceSystems.completed_service_jobs,
-		"weekly_report": GameManager.weekly_reports[-1] if GameManager.weekly_reports else null
-	}

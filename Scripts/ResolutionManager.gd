@@ -12,5 +12,4 @@ var resolutions = [
 
 
 func _ready():
-    set_process_input(true)
-    
+    pass

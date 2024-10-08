@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="IndustryList" load_steps=2 format=3]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/IndustryList.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+industries = [
+	{
+		"industry_id": 1,
+		"industry_name": "Clothing",
+		"products_resource": "res://Resources/Products/ClothingProducts.tres"
+	},
+]

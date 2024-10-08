@@ -143,7 +143,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.894922, 0.894922, 0.894922, 1)
 
-[node name="CompanyInfo" type="Panel" parent="."]
+[node name="BusinessInfo" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -154,7 +154,7 @@ offset_bottom = 80.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_grsgw")
 
-[node name="ViewTitle" type="Label" parent="CompanyInfo"]
+[node name="ViewTitle" type="Label" parent="BusinessInfo"]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 9.0
@@ -163,14 +163,14 @@ offset_bottom = 59.0
 text = "Dashboard"
 label_settings = SubResource("LabelSettings_x0pfh")
 
-[node name="ColorRect" type="ColorRect" parent="CompanyInfo"]
+[node name="ColorRect" type="ColorRect" parent="BusinessInfo"]
 layout_mode = 2
 offset_right = 1488.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.894922, 0.894922, 0.894922, 1)
 
-[node name="CompanyName" type="Label" parent="CompanyInfo"]
+[node name="BusinessName" type="Label" parent="BusinessInfo"]
 layout_mode = 2
 offset_left = 1374.0
 offset_top = 4.0
@@ -178,10 +178,10 @@ offset_right = 1782.0
 offset_bottom = 38.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
-text = "CompanyName, LLC"
+text = "BusinessName, LLC"
 horizontal_alignment = 2
 
-[node name="BusinessType" type="Label" parent="CompanyInfo"]
+[node name="BusinessIndustry" type="Label" parent="BusinessInfo"]
 layout_mode = 2
 offset_left = 1319.0
 offset_top = 36.0
