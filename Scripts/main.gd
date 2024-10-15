@@ -8,6 +8,7 @@ extends Control
 @onready var main_content = $MainLayout/MainContent
 @onready var bottom_nav = $MainLayout/BottomNav/HBoxContainer
 @onready var advance_week_button = $MainLayout/BottomNav/AdvanceWeekBtn
+@onready var map_button = $MainLayout/BottomNav/MapBtn
 
 # Dictionary to hold references to menu scenes
 var views = {
@@ -18,6 +19,7 @@ var views = {
 	"RnD": preload("res://Scenes/RnD.tscn"),
 	"Operations": preload("res://Scenes/Operations.tscn"),
 	"Assets": preload("res://Scenes/Assets.tscn"),
+	"Map": preload("res://Scenes/Map.tscn"),
 }
 
 func _ready():
@@ -26,6 +28,8 @@ func _ready():
 		button.connect("pressed", Callable(self, "_on_nav_button_pressed").bind(button.name))
 
 	advance_week_button.connect("pressed", Callable(self, "_on_advance_week_pressed"))
+
+	map_button.connect("pressed", Callable(self, "_on_map_button_pressed"))
 	
 	#Initialize UI
 	update_ui()
@@ -33,6 +37,9 @@ func _ready():
 
 func _on_nav_button_pressed(view_name):
 	show_view(view_name)
+
+func _on_map_button_pressed():
+	show_view("Map")
 
 func show_view(view_name):
 	# Remove the current content
@@ -54,8 +61,6 @@ func update_ui():
 
 func _on_advance_week_pressed():
 	TurnManager.advance_week()
-
-	# TODO: Implement week-based logic (costs, revenues, reputation change, etc.)
 
 	update_ui()
 

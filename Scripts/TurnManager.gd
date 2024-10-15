@@ -28,9 +28,6 @@ func advance_week():
 	# Process weekly profit
 	weekly_profit = weekly_revenue - weekly_expense
 	
-	# Generate new opportunities
-	ServiceSystems.generate_opportunities(randi() % 3 + 1) # 1-3 new opportunities per week
-	
 	# Create weekly report
 	var report = Data.WeeklyReport.new()
 	
@@ -46,9 +43,6 @@ func advance_week():
 	weekly_revenue = 0
 	weekly_expense = 0
 	weekly_profit = 0
-	
-	# Reset completed projects
-	ServiceSystems.completed_service_jobs.clear()
 
 	# Update the dashboard
 	var main_layout = get_tree().get_root().get_node("GameUI/MainLayout")

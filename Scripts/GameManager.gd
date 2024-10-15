@@ -19,7 +19,7 @@ func initialize_player(player_name: String):
 	player = Data.Player.new()
 	player.player_name = player_name
 	player.current_funds = 10000
-	player.experience_level = 1
+	player.experience_level = 5
 	player.total_businesses_owned = 0
 	player.player_id = 1
 	player.active_business_id = 0
@@ -27,6 +27,7 @@ func initialize_player(player_name: String):
 
 func create_business(business_name: String, business_type: String, industry: String):
 	var new_business = Data.Business.new()
+	new_business.business_id = businesses.size() + 1
 	new_business.player_id = player.player_id
 	new_business.business_name = business_name
 	new_business.business_type = business_type
@@ -70,3 +71,9 @@ func adjust_reputation(amount):
 	var active_business = get_active_business()
 	active_business.reputation += amount
 	print("Reputation adjusted by %d, new reputation: %d" % [amount, active_business.reputation])
+
+func get_player_business_location():
+	var active_business = get_active_business()
+	if active_business:
+		return active_business.location
+	return ""

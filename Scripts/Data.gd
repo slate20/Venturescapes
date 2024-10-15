@@ -14,13 +14,13 @@ class Competitor:
 	var growth_level: int
 	var perceived_strategy: String
 	var failure_rate: float
-	var failed_jobs: int
 	var business_status: String # Active, Struggling, Bankrupt
 
 class Business:
 	var business_id: int
 	var player_id: int # Foreign Key to Player
 	var ai_id: int # Foreign Key to AI
+	var location: String
 	var business_name: String
 	var business_type: String
 	var industry: String
@@ -41,14 +41,13 @@ class Job:
 	var job_id: int
 	var business_id: int # Foreign Key to Business
 	var job_name: String
-	var job_type: String
+	var job_type: String # Direct or Marketplace Bid
 	var client_name: String
 	var deadline: int
 	var payout: int
-	var status: String
-	var penalty: int 
-	var job_status: String # Pending, In Progress, Completed, Late
-	
+	var status: String # Pending, In Progress, Completed, Late
+	var penalty: int # amount of money deducted per week from payout if late
+
 class CustomerOrder:
 	var order_id: int
 	var reseller_id: int # Foreign Key to Reseller

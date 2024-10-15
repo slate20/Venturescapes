@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxxfkpf516tm5"]
+
+[ext_resource type="Script" path="res://Scripts/map_container.gd" id="1_i0067"]
+[ext_resource type="Texture2D" uid="uid://lq2q2aksqm28" path="res://Assets/Maps/OSM_Transport.png" id="1_xps8p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wog3h"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_tequ1"]
+font_size = 36
+font_color = Color(0, 0, 0, 1)
+
+[node name="Map" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 56.0
+offset_top = 32.0
+offset_right = 1912.0
+offset_bottom = 956.0
+
+[node name="BusinessInfo" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 24.0
+offset_top = 10.0
+offset_right = -24.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wog3h")
+
+[node name="ViewTitle" type="Label" parent="BusinessInfo"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 9.0
+offset_right = 213.0
+offset_bottom = 59.0
+text = "Map"
+label_settings = SubResource("LabelSettings_tequ1")
+
+[node name="ColorRect" type="ColorRect" parent="BusinessInfo"]
+layout_mode = 2
+offset_right = 1488.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.894922, 0.894922, 0.894922, 1)
+
+[node name="BusinessName" type="Label" parent="BusinessInfo"]
+layout_mode = 2
+offset_left = 1374.0
+offset_top = 4.0
+offset_right = 1782.0
+offset_bottom = 38.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "BusinessName, LLC"
+horizontal_alignment = 2
+
+[node name="BusinessIndustry" type="Label" parent="BusinessInfo"]
+layout_mode = 2
+offset_left = 1319.0
+offset_top = 36.0
+offset_right = 1781.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(0.385493, 0.385492, 0.385492, 1)
+theme_override_font_sizes/font_size = 20
+text = "BusinessType"
+horizontal_alignment = 2
+
+[node name="MapView" type="Panel" parent="."]
+clip_contents = true
+layout_mode = 0
+offset_left = 711.0
+offset_top = 99.0
+offset_right = 1831.0
+offset_bottom = 926.0
+
+[node name="MapContainer" type="Control" parent="MapView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i0067")
+
+[node name="Map" type="TextureRect" parent="MapView/MapContainer"]
+layout_mode = 0
+offset_left = -686.0
+offset_top = -569.0
+offset_right = 2035.0
+offset_bottom = 881.0
+texture = ExtResource("1_xps8p")
