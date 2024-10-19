@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-b_u-de!mx1lvn2dk4l(=rvbnfilz$wi98m%!%5^qp+fj714twc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ '*' ]
 
 
 # Application definition
@@ -50,6 +50,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+LOGIN_URL = '../../core/login/'
 
 ROOT_URLCONF = 'venturescapes.urls'
 
@@ -122,6 +124,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [BASE_DIR / "core/static",]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

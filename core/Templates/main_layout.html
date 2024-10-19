@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block page %}
+<div class="top-bar">
+    <div class="status-item">Time: 14:35</div>
+    <div class="status-item">Date: Week X, 2024</div>
+    <div class="status-item">Funds: $10,000</div>
+</div>
+<div class="ui">
+    <div class="sidebar">
+        <h2>Slate W3, LLC</h2>
+        <ul>
+            <li>
+                <a href="#">Dashboard</a>
+                <ul class="nested-nav">
+                    <li><a href="#">Overview</a></li>
+                    <li><a href="#">Opportunities</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Finances</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">HR</a></li>
+            <li><a href="#">R&D</a></li>
+            <li><a href="#">Operations</a></li>
+            <li><a href="#">Assets</a></li>
+        </ul>
+        <form method="post" action="/core/logout/">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+    <div class="content" hx-get="/core/dashboard" hx-swap="innerHTML" hx-trigger="load"></div>
+</div>
+{% endblock %}

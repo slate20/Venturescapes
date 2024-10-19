@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Player(models.Model):
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE, null=True, blank=True)
     player_id = models.AutoField(primary_key=True)
     player_name = models.CharField(max_length=100)
     current_funds = models.IntegerField()
@@ -96,6 +97,7 @@ class Asset(models.Model):
     asset_subtype = models.CharField(max_length=255)  # Warehouse, Office, Delivery Vehicle, etc.
     purchase_price = models.IntegerField()
     purchase_date = models.DateField()
+    location = models.CharField(max_length=255, null=True, blank=True)
     condition = models.FloatField()  # for non real estate assets, affects productivity
     maintenance_cost = models.IntegerField()
     deterioration_rate = models.FloatField()  # rate that assets condition decreases over time
@@ -141,4 +143,5 @@ class Product(models.Model):
 class WeeklyReport(models.Model):
     week = models.IntegerField()
     revenue = models.IntegerField()
-    expenses = models.IntegerField
+    expenses = models.IntegerField()
+    profit = models.IntegerField()

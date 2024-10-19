@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background-color: #ecf0f1; /* Light gray background */
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.page {
+    min-width: 100%;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #27282c; /* Blue */
+    color: white;
+    height: 24px;
+    padding: 10px;
+}
+
+.ui {
+    width: 100vw;
+    height: calc(100vh - 24px);
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50; /* Muted navy blue */
+    color: white;
+    padding: 20px;
+    position: relative;
+    height: calc(100vh - 24px);
+    overflow: auto;
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 20px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #34495e; /* Slightly lighter navy */
+}
+
+.sidebar .nested-nav {
+    list-style-type: none;
+    padding-left: 20px; /* Indentation */
+}
+
+.sidebar .nested-nav li {
+    margin: 10px 0;
+}
+
+.sidebar .nested-nav li a {
+    font-size: 0.9em; /* Smaller font size for nested items */
+    background-color: #34495e; /* Slightly lighter navy */
+}
+
+.main-view {
+    margin-left: 270px; /* Adjust to match sidebar width */
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.content {
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.weekly-summary, .pipeline, .news-alerts, .ytd-summary, .kpi {
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    background-color: #27ae60; /* Muted green */
+    height: 20px;
+}
