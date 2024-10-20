@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block page %}
+<div id="player-setup">
+    <h1>Player Setup</h1>
+    <form hx-post="/core/player_setup/" hx-target="#player-setup">
+        {% csrf_token %}
+        <label for="business_name">Business Name:</label>
+        <input type="text" id="business_name" name="business_name"><br><br>
+        <label for="business_type">Business Type:</label>
+        <select id="business_type" name="business_type">
+            <option value="Manufacturing">Manufacturing</option>
+            <option value="Reseller">Reseller</option>
+            <option value="Service">Service</option>
+        </select><br><br>
+        <label for="industry">Industry:</label>
+        <select id="industry" name="industry">
+            <option value="Web Development">Web Development</option>
+        </select><br><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}
