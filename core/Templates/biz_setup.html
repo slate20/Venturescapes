@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block page %}
-<div id="player-setup">
-    <h1>Player Setup</h1>
-    <form hx-post="/core/player_setup/" hx-target="#player-setup">
+<div id="biz-setup">
+    <h1>Business Setup</h1>
+    <form hx-post="/core/biz_setup/" hx-target="#biz-setup">
         {% csrf_token %}
         <label for="business_name">Business Name:</label>
         <input type="text" id="business_name" name="business_name"><br><br>

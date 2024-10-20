@@ -21,7 +21,7 @@ def register(request):
             Player.objects.get_or_create(user=request.user)
 
             # Redirect to the player setup
-            return redirect('player_setup')
+            return redirect('biz_setup')
     else:
         form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
@@ -49,7 +49,7 @@ def main_layout(request):
 def dashboard(request):
     return render(request, 'dashboard.html', {'hx_view': 'true'})
 
-def player_setup(request):
+def biz_setup(request):
     player = Player.objects.get(user=request.user)
 
     # If the player already has an active business, redirect to the main layout

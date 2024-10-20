@@ -1,13 +1,14 @@
 {% extends "base.html" %}
+{% load humanize %}
 {% block page %}
 <div class="top-bar">
     <div class="status-item">Time: 14:35</div>
     <div class="status-item">Date: Week X, 2024</div>
-    <div class="status-item">Funds: $10,000</div>
+    <div class="status-item">Funds: ${{ request.user.player.current_funds|intcomma }}</div>
 </div>
 <div class="ui">
     <div class="sidebar">
-        <h2>Slate W3, LLC</h2>
+        <h2>{{ request.user.player.active_business_id.business_name }}</h2>
         <ul>
             <li>
                 <a href="#">Dashboard</a>
