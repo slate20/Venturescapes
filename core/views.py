@@ -76,3 +76,6 @@ def biz_setup(request):
             return redirect('main_layout')
         else:
             return render(request, 'player_setup.html')
+        
+def opportunities(request):
+    return render(request, 'opportunities.html', {'hx_view': 'true'})

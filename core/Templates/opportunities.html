@@ -1,0 +1,76 @@
+{% load humanize %}
+<div class="opportunities">
+    <div class="header">
+        <h1>Opportunities</h1>
+    </div>
+    <div class="opportunities-window">
+        <div class="opportunities-grid">
+            <!-- Left Column: Direct Requests & Marketplace Jobs -->
+            <div class="left-column">
+                <div class="card direct-requests">
+                    <h3>Direct Requests</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Job Type</th>
+                                <th>Budget</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>TechCorp</td>
+                                <td>Web Development</td>
+                                <td>${{ 10000|intcomma }}</td>
+                            </tr>
+                            <tr>
+                                <td>StyleInc</td>
+                                <td>Logo Design</td>
+                                <td>${{ 2500|intcomma }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card marketplace-jobs">
+                    <h3>Marketplace Jobs</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Job Type</th>
+                                <th>Budget Range</th>
+                                <th>Deadline</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mobile App</td>
+                                <td>${{ 15000|intcomma }} - ${{ 20000|intcomma }}</td>
+                                <td>30 days</td>
+                            </tr>
+                            <tr>
+                                <td>SEO Optimization</td>
+                                <td>${{ 5000|intcomma }} - ${{ 8000|intcomma }}</td>
+                                <td>45 days</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Right Column: Selected Job Details (Full Height) -->
+            <div class="card selected-job-details full-height">
+                <h3>Selected Job Details</h3>
+                <p>Client: TechCorp</p>
+                <p>Job Type: Web Development</p>
+                <p>Description: E-commerce site redesign with improved UX and mobile responsiveness</p>
+                <p>Payout: ${{ 10000|intcomma }}</p>
+                <p>Estimated Time: 3 weeks</p>
+                <p>Deadline: May 15, 2024</p>
+                <p>Late Fee: $500 per day</p>
+                <button class="accept-job">Accept Job</button>
+                <button class="decline-job">Decline Job</button>
+            </div>
+        </div>
+    </div>
+</div>

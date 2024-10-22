@@ -13,8 +13,8 @@
             <li>
                 <a href="#">Dashboard</a>
                 <ul class="nested-nav">
-                    <li><a href="#">Overview</a></li>
-                    <li><a href="#">Opportunities</a></li>
+                    <li><button hx-get="/core/dashboard" hx-swap="innerHTML" hx-target="#content">Overview</button></li>
+                    <li><button hx-get="/core/opportunities" hx-swap="innerHTML" hx-target="#content">Opportunities</button></li>
                 </ul>
             </li>
             <li><a href="#">Finances</a></li>
@@ -29,6 +29,6 @@
             <button type="submit">Logout</button>
         </form>
     </div>
-    <div class="content" hx-get="/core/dashboard" hx-swap="innerHTML" hx-trigger="load"></div>
+    <div class="content" id="content" hx-get="/core/dashboard" hx-swap="innerHTML" hx-trigger="load"></div>
 </div>
 {% endblock %}

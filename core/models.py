@@ -9,18 +9,20 @@ class Player(models.Model):
     experience_level = models.IntegerField(default=0)
     total_businesses_owned = models.IntegerField(default=0)
 
-class Competitor(models.Model):
-    ai_id = models.AutoField(primary_key=True)
+class AIBusiness(models.Model):
+    aibusiness_id = models.AutoField(primary_key=True)
+    business_name = models.CharField(max_length=100)
+    industry = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
     financial_health = models.CharField(max_length=50)
     growth_level = models.IntegerField()
-    perceived_strategy = models.CharField(max_length=100)
     failure_rate = models.FloatField()
     business_status = models.CharField(max_length=50)
+    missed_deadlines = models.IntegerField()
 
 class Business(models.Model):
     business_id = models.AutoField(primary_key=True)
     player_owner = models.ForeignKey(Player, on_delete=models.CASCADE, null=True, blank=True)
-    ai_owner = models.ForeignKey(Competitor, on_delete=models.CASCADE, null=True, blank=True)
     location = models.CharField(max_length=100)
     business_name = models.CharField(max_length=100)
     business_type = models.CharField(max_length=100)
@@ -34,9 +36,6 @@ class Business(models.Model):
     financial_health = models.CharField(max_length=50, default="Unknown")
     business_status = models.CharField(max_length=50, default="Active")
     date_founded = models.CharField(max_length=50, default="")
-    growth_level = models.IntegerField(default=0)
-    failure_rate = models.FloatField(default=0.1)
-    missed_deadlines = models.IntegerField(default=0)
 
 class Job(models.Model):
     job_id = models.AutoField(primary_key=True)
@@ -44,11 +43,11 @@ class Job(models.Model):
     job_name = models.CharField(max_length=255)
     job_type = models.CharField(max_length=255, default="Direct")  # Direct or Marketplace Bid
     client_name = models.CharField(max_length=255)
-    expiration = models.IntegerField()
-    deadline = models.IntegerField()
-    payout = models.IntegerField()
+    expiration = models.IntegerField() # time until job is no longer available (later implementation will have ai competitors pick these up)
+    deadline = models.IntegerField() # in-game date that the job is due
+    payout = models.IntegerField() # amount of money earned once completed
     status = models.CharField(max_length=255)  # Pending, In Progress, Completed, Late
-    penalty = models.IntegerField()  # amount of money deducted per week from payout if late
+    penalty = models.IntegerField()  # amount of money deducted per turn from payout if late
 
 class CustomerOrder(models.Model):
     order_id = models.AutoField(primary_key=True)
