@@ -1,0 +1,19 @@
+{% load humanize %}
+<h3>Selected Job Details</h3>
+<p>Expires in {{ job.expiration }} days</p> 
+<p>Job: {{ job.job_name }}</p>
+<p>Client: {{ job.client_name }}</p>
+<p>Estimated Time to Complete: {{ job.completion_time }} days</p>
+<p>Payout: ${{ job.payout|intcomma }}</p>
+<p>Deadline: {{ job.deadline }} Weeks</p>
+<p>Late Fee: ${{ job.late_fee|intcomma }} per week</p>
+<button
+    hx-post="{% url 'accept_job' job.job_id %}"
+    hx-target="#content"
+    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+    class="accept-job">Accept Job</button>
+<button
+    hx-post="{% url 'decline_job' job.job_id %}"
+    hx-target="#content"
+    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+    class="decline-job">Decline Job</button>

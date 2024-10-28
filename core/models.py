@@ -29,6 +29,7 @@ class Business(models.Model):
     industry = models.CharField(max_length=100)
     rank = models.FloatField(default=1.0)
     reputation = models.IntegerField(default=5)
+    funds = models.IntegerField(default=0)
     weekly_revenue = models.IntegerField(default=0)
     weekly_expenses = models.IntegerField(default=0)
     weekly_profit = models.IntegerField(default=0)
@@ -39,11 +40,12 @@ class Business(models.Model):
 
 class Job(models.Model):
     job_id = models.AutoField(primary_key=True)
-    business_id = models.ForeignKey('Business', on_delete=models.CASCADE)
+    business_id = models.ForeignKey('Business', on_delete=models.CASCADE, null=True, blank=True)
     job_name = models.CharField(max_length=255)
     job_type = models.CharField(max_length=255, default="Direct")  # Direct or Marketplace Bid
     client_name = models.CharField(max_length=255)
-    expiration = models.IntegerField() # time until job is no longer available (later implementation will have ai competitors pick these up)
+    completion_time = models.IntegerField(default=3) # in-game days (ticks) needed to complete the job
+    expiration = models.IntegerField(default=3) # ticks until job is no longer available (later implementation will have ai competitors pick these up)
     deadline = models.IntegerField() # in-game date that the job is due
     payout = models.IntegerField() # amount of money earned once completed
     status = models.CharField(max_length=255)  # Pending, In Progress, Completed, Late

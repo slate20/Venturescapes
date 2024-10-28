@@ -3,7 +3,9 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .models import Player, Business
+from django.utils import timezone
+from django.utils.dateformat import DateFormat
+from .models import Player, Business, Job
 
 
 # Create your views here.
@@ -43,7 +45,12 @@ def logout_view(request):
 
 @login_required
 def main_layout(request):
-    return render(request, 'main_layout.html')
+    current_time = timezone.now()
+    formatted_time = DateFormat(current_time).format('g:i A')
+    context = {
+        'server_time': formatted_time
+    }
+    return render(request, 'main_layout.html', context)
 
 @login_required
 def dashboard(request):
@@ -77,5 +84,45 @@ def biz_setup(request):
         else:
             return render(request, 'player_setup.html')
         
+@login_required
 def opportunities(request):
-    return render(request, 'opportunities.html', {'hx_view': 'true'})
+    # Get the current business
+    current_business = request.user.player.active_business_id
+
+    # Fetch the direct request jobs for the current business
+    direct_requests = Job.objects.filter(
+        business_id=current_business,
+        job_type='Direct',
+        status='Pending'
+    )
+
+    context = {
+        'direct_requests': direct_requests,
+        'hx_view': 'true'
+    }
+
+    return render(request, 'opportunities.html', context)
+
+@login_required
+def get_job_details(request, job_id):
+    job = Job.objects.get(job_id=job_id)
+
+    if Job.objects.get(job_id=job_id).job_type == 'Direct':
+        return render(request, 'direct_job_details.html', {'job': job})
+    
+    else:
+        return render(request, 'marketplace_job_details.html', {'job': job})
+
+@login_required
+def accept_job(request, job_id):
+    job = Job.objects.get(job_id=job_id)
+    job.status = 'In Progress'
+    job.save()
+    return opportunities(request)
+
+@login_required
+def decline_job(request, job_id):
+    job = Job.objects.get(job_id=job_id)
+    job.status = 'Declined'
+    job.save()
+    return opportunities(request)

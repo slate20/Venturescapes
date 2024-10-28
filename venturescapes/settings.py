@@ -59,7 +59,10 @@ ROOT_URLCONF = 'venturescapes.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'core/templates',
+            BASE_DIR / 'core/templates/components',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

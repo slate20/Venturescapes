@@ -7,27 +7,31 @@
         <div class="opportunities-grid">
             <!-- Left Column: Direct Requests & Marketplace Jobs -->
             <div class="left-column">
-                <div class="card direct-requests">
+                <div class="card direct-requests" id="direct-requests">
                     <h3>Direct Requests</h3>
                     <table>
                         <thead>
                             <tr>
                                 <th>Client</th>
                                 <th>Job Type</th>
-                                <th>Budget</th>
+                                <th>Payout</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>TechCorp</td>
-                                <td>Web Development</td>
-                                <td>${{ 10000|intcomma }}</td>
+                            {% for job in direct_requests %}
+                            <tr hx-get="{% url 'get_job_details' job.job_id %}"
+                                hx-target="#selected-job-details"
+                                hx-trigger="click"
+                                class="job-row">
+                                <td>{{ job.client_name }}</td>
+                                <td>{{ job.job_name }}</td>
+                                <td>${{ job.payout|intcomma }}</td>
                             </tr>
+                            {% empty %}
                             <tr>
-                                <td>StyleInc</td>
-                                <td>Logo Design</td>
-                                <td>${{ 2500|intcomma }}</td>
+                                <td colspan="3">No direct requests available at this time.</td>
                             </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -59,17 +63,9 @@
             </div>
 
             <!-- Right Column: Selected Job Details (Full Height) -->
-            <div class="card selected-job-details full-height">
+            <div class="card selected-job-details full-height" id="selected-job-details">
                 <h3>Selected Job Details</h3>
-                <p>Client: TechCorp</p>
-                <p>Job Type: Web Development</p>
-                <p>Description: E-commerce site redesign with improved UX and mobile responsiveness</p>
-                <p>Payout: ${{ 10000|intcomma }}</p>
-                <p>Estimated Time: 3 weeks</p>
-                <p>Deadline: May 15, 2024</p>
-                <p>Late Fee: $500 per day</p>
-                <button class="accept-job">Accept Job</button>
-                <button class="decline-job">Decline Job</button>
+                <p>Select a job to view details.</p>
             </div>
         </div>
     </div>
