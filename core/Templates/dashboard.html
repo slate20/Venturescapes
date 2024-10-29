@@ -11,12 +11,8 @@
                 <p>Expenses: ${{ request.user.player.active_business_id.weekly_expenses|intcomma }}</p>
                 <p>Net Profit: ${{ request.user.player.active_business_id.weekly_profit|intcomma }}</p>
             </div>
-            <div class="card pipeline">
+            <div class="card pipeline" id="pipeline" hx-get="{% url 'pipeline' %}" hx-trigger="load" hx-swap="innerHTML">
                 <h3>Pipeline</h3>
-                <p>Project 1: E-commerce Site</p>
-                <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
-                <p>Project 2: Mobile App</p>
-                <div class="progress-bar"><div class="progress" style="width: 40%;"></div></div>
             </div>
             <div class="card ytd-summary">
                 <h3>YTD Summary</h3>

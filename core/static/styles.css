@@ -15,6 +15,7 @@ body {
 }
 
 .top-bar {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,6 +23,18 @@ body {
     color: white;
     height: 24px;
     padding: 0px 20px;
+}
+
+.top-bar .status-date {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.top-bar .status-funds {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .ui {
@@ -91,10 +104,13 @@ body {
     display: none;
     list-style-type: none;
     padding-left: 20px; /* Indentation */
+    transition: max-height 0.3s ease-in-out;
 }
 
 .sidebar .nested-nav.show {
     display: block;
+    max-height: 100vh;
+    transition: max-height 0.3s ease-in-out;
 }
 
 .sidebar .nested-nav li {
@@ -170,6 +186,27 @@ body {
 .pipeline {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
+}
+
+.pipeline-job {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.pipeline-job button {
+    padding: 6px;
+    border-radius: 5px;
+    background-color: #4866ca;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.pipeline-job button:hover {
+    background-color: #5679e9;
 }
 
 .ytd-summary {
@@ -305,6 +342,6 @@ button.decline-job:hover {
 }
 
 .progress {
-    background-color: #27ae60; /* Muted green */
+    background-color: #2c81b9; /* Muted blue */
     height: 20px;
 }

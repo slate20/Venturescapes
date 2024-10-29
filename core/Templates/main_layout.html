@@ -2,9 +2,10 @@
 {% load humanize %}
 {% block page %}
 <div class="top-bar">
-    <div class="status-item" id="time">Time: {{ server_time }}</div>
-    <div class="status-item">Date: Day X, Week Y, 2024</div>
-    <div class="status-item">Funds: ${{ request.user.player.current_funds|intcomma }}</div>
+    <div class="status-time" id="time">Time: {{ server_time }}</div>
+    <div class="status-date">Date: Day {{ game_day }}, Week {{ game_week }}, {{ game_year }}</div>
+    <span class="status-funds"><div class="status-item">Funds: ${{ request.user.player.current_funds|intcomma }}</div>
+    <div class="status-item">Current Task: {{ request.user.player.current_task }}</div></span>
 </div>
 <div class="ui">
     <div class="sidebar">

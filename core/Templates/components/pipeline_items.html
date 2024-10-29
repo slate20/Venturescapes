@@ -1,0 +1,29 @@
+<h3>Pipeline</h3>
+{% for job in jobs %}
+    <div class="pipeline-job">
+        <p>{{ job.job_name }} for {{ job.client_name }}</p>
+        <button 
+            hx-post="{% url 'work_on_job' job.job_id %}" 
+            hx-target="page"
+            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+            class="work-on-job-btn">Work On Job</button>
+    </div>
+    <div class="progress-bar" style="position: relative">
+        <div class="progress" style="width: {{ job_progress }}%"></div>
+        <span 
+            class="progress-text" 
+            style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px #000, 
+            -1px -1px 1px #000, 
+            1px -1px 1px #000, 
+            -1px 1px 1px #000;
+            ">
+            {{ job_progress }}%</span>
+    </div>
+{% endfor %}

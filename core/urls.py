@@ -12,4 +12,6 @@ urlpatterns = [
     path("get_job_details/<int:job_id>/", views.get_job_details, name="get_job_details"),
     path("accept_job/<int:job_id>/", views.accept_job, name="accept_job"),
     path("decline_job/<int:job_id>/", views.decline_job, name="decline_job"),
+    path("pipeline/", views.pipeline, name="pipeline"),
+    path("work_on_job/<int:job_id>/", views.work_on_job, name="work_on_job"),
 ]

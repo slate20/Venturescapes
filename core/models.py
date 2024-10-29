@@ -1,6 +1,26 @@
 from django.db import models
 
 # Create your models here.
+class GameState (models.Model):
+    id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    current_day = models.IntegerField(default=1)
+    current_week = models.IntegerField(default=1)
+    current_year = models.IntegerField(default=2024)
+
+    @classmethod
+    def initialize(cls):
+        state, created = cls.objects.get_or_create(pk=1)
+        if created:
+            state.current_day = 1
+            state.current_week = 1
+            state.current_year = 2024
+            state.save()
+        return state
+    
+    @classmethod
+    def get_current(cls):
+        return cls.objects.first()
+
 class Player(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE, null=True, blank=True)
     player_id = models.AutoField(primary_key=True)
@@ -8,6 +28,8 @@ class Player(models.Model):
     active_business_id = models.ForeignKey('Business', on_delete=models.CASCADE, null=True, blank=True)
     experience_level = models.IntegerField(default=0)
     total_businesses_owned = models.IntegerField(default=0)
+    working_job = models.ForeignKey('Job', on_delete=models.CASCADE, null=True, blank=True)
+    current_task = models.CharField(max_length=255, null=True, blank=True)
 
 class AIBusiness(models.Model):
     aibusiness_id = models.AutoField(primary_key=True)
@@ -44,6 +66,7 @@ class Job(models.Model):
     job_name = models.CharField(max_length=255)
     job_type = models.CharField(max_length=255, default="Direct")  # Direct or Marketplace Bid
     client_name = models.CharField(max_length=255)
+    time_worked = models.IntegerField(default=0)
     completion_time = models.IntegerField(default=3) # in-game days (ticks) needed to complete the job
     expiration = models.IntegerField(default=3) # ticks until job is no longer available (later implementation will have ai competitors pick these up)
     deadline = models.IntegerField() # in-game date that the job is due

@@ -1,88 +1,60 @@
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.utils.dateformat import DateFormat
-from .models import Player, Business, Job
+from core.services.auth_service import AuthService
+from core.services.business_service import BusinessService
+from core.services.job_service import JobService
+from .models import Player, Business, Job, GameState
 
 
 # Create your views here.
 def register(request):
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-
-            # Login the user
-            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
-            login(request, user)
-
-            # Create a Player instance tied to the user
-            Player.objects.get_or_create(user=request.user)
-
-            # Redirect to the player setup
-            return redirect('biz_setup')
-    else:
-        form = CustomUserCreationForm()
-    return render(request, 'register.html', {'form': form})
+    return AuthService.register(request)
 
 def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('main_layout')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+    return AuthService.login_user(request)
 
 def logout_view(request):
-    logout(request)
-    return redirect('login')
+    return AuthService.logout_user(request)
 
 @login_required
 def main_layout(request):
     current_time = timezone.now()
     formatted_time = DateFormat(current_time).format('g:i A')
+    jobs = Job.objects.filter(business_id=request.user.player.active_business_id)
     context = {
-        'server_time': formatted_time
+        'server_time': formatted_time,
+        'game_day': GameState.objects.first().current_day,
+        'game_week': GameState.objects.first().current_week,
+        'game_year': GameState.objects.first().current_year,
     }
-    return render(request, 'main_layout.html', context)
+    return render(request, 'main_layout.html', context=context)
 
 @login_required
 def dashboard(request):
-    return render(request, 'dashboard.html', {'hx_view': 'true'})
+    # Get the current business
+    current_business = request.user.player.active_business_id
+
+    # Fetch the jobs for the current business
+    jobs = Job.objects.filter(
+        business_id=current_business,
+        status='In Progress'
+    )
+
+    for job in jobs:
+        job_progress = round(job.time_worked / job.completion_time * 100) if job.completion_time != 0 else 0
+
+    context = {
+        'jobs': jobs,
+        'hx_view': 'true',
+        'job_progress': job_progress,
+    }
+
+    return render(request, 'dashboard.html', context)
 
 def biz_setup(request):
-    player = Player.objects.get(user=request.user)
-
-    # If the player already has an active business, redirect to the main layout
-    if player.active_business_id:
-        return redirect('main_layout')
-    else:
-        if request.method == 'POST':
-            business_name = request.POST.get('business_name')
-            business_type = request.POST.get('business_type')
-            industry = request.POST.get('industry')
-
-            # Create a Business instance that belongs to the player
-            business = Business.objects.create(
-                player_owner=player,
-                business_name=business_name,
-                business_type=business_type,
-                industry=industry
-            )
-
-            # Set the business as the player's active business
-            player.active_business_id = business
-            player.save()
-
-            return redirect('main_layout')
-        else:
-            return render(request, 'player_setup.html')
+    return BusinessService.new_business_setup(request)
         
 @login_required
 def opportunities(request):
@@ -107,22 +79,32 @@ def opportunities(request):
 def get_job_details(request, job_id):
     job = Job.objects.get(job_id=job_id)
 
-    if Job.objects.get(job_id=job_id).job_type == 'Direct':
-        return render(request, 'direct_job_details.html', {'job': job})
-    
-    else:
-        return render(request, 'marketplace_job_details.html', {'job': job})
+    return JobService.get_job_details(request, job)
 
 @login_required
 def accept_job(request, job_id):
     job = Job.objects.get(job_id=job_id)
-    job.status = 'In Progress'
-    job.save()
+
+    JobService.accept_job(job)
+
     return opportunities(request)
 
 @login_required
 def decline_job(request, job_id):
     job = Job.objects.get(job_id=job_id)
-    job.status = 'Declined'
-    job.save()
+    
+    JobService.decline_job(job)
+
     return opportunities(request)
+
+@login_required
+def pipeline(request):
+    return render(request, 'pipeline_items.html')
+
+@login_required
+def work_on_job(request, job_id):
+    job = Job.objects.get(job_id=job_id)
+
+    JobService.work_on_job(job)
+
+    return render(request, 'main_layout.html', {'job': job})

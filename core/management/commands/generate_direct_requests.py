@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from core.services.jobs_service import JobService
+from core.services.job_service import JobService
 from core.models import Business
 
 class Command(BaseCommand):

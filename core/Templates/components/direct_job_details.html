@@ -5,7 +5,7 @@
 <p>Client: {{ job.client_name }}</p>
 <p>Estimated Time to Complete: {{ job.completion_time }} days</p>
 <p>Payout: ${{ job.payout|intcomma }}</p>
-<p>Deadline: {{ job.deadline }} Weeks</p>
+<p>Deadline: {{ job_deadline }}</p>
 <p>Late Fee: ${{ job.late_fee|intcomma }} per week</p>
 <button
     hx-post="{% url 'accept_job' job.job_id %}"
