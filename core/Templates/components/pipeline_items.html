@@ -2,14 +2,34 @@
 {% for job in jobs %}
     <div class="pipeline-job">
         <p>{{ job.job_name }} for {{ job.client_name }}</p>
-        <button 
-            hx-post="{% url 'work_on_job' job.job_id %}" 
-            hx-target="page"
-            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-            class="work-on-job-btn">Work On Job</button>
+        {% if job.status == 'Completed' %}
+            <button
+                hx-post="{% url 'complete_job' job.job_id %}"
+                hx-target="#pipeline"
+                hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                class="completed-job-btn"
+                style="background-color: #27ae60">Send Invoice</button>
+        {% elif request.user.player.working_job == job %}
+            <button 
+                hx-post="{% url 'stop_working_job' job.job_id %}"
+                hx-target="#pipeline"
+                hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                class="stop-working-btn"
+                style="background-color: #c0392b">Stop Working</button>
+        {% else %}
+            <button 
+                hx-post="{% url 'work_on_job' job.job_id %}" 
+                hx-target="#pipeline"
+                hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                class="work-on-job-btn">Work On Job</button>
+        {% endif %}
     </div>
     <div class="progress-bar" style="position: relative">
-        <div class="progress" style="width: {{ job_progress }}%"></div>
+        {% if job.progress == 100 %}
+            <div class="progress" style="width: 100%; background-color: #27ae60"></div>
+        {% else %}
+            <div class="progress" style="width: {{ job.progress }}%"></div>
+        {% endif %}
         <span 
             class="progress-text" 
             style="
@@ -24,6 +44,6 @@
             1px -1px 1px #000, 
             -1px 1px 1px #000;
             ">
-            {{ job_progress }}%</span>
+            {{ job.progress }}%</span>
     </div>
 {% endfor %}

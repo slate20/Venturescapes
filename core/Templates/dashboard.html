@@ -7,9 +7,9 @@
         <div class="dashboard-grid">
             <div class="card weekly-summary">
                 <h3>Weekly Summary</h3>
-                <p>Revenue: ${{ request.user.player.active_business_id.weekly_revenue|intcomma }}</p>
-                <p>Expenses: ${{ request.user.player.active_business_id.weekly_expenses|intcomma }}</p>
-                <p>Net Profit: ${{ request.user.player.active_business_id.weekly_profit|intcomma }}</p>
+                <p>Projected Revenue: ${{ request.user.player.active_business_id.weekly_revenue|intcomma }}</p>
+                <p>Projected Expenses: ${{ request.user.player.active_business_id.weekly_expenses|intcomma }}</p>
+                <p>Projected Net Profit: ${{ request.user.player.active_business_id.weekly_profit|intcomma }}</p>
             </div>
             <div class="card pipeline" id="pipeline" hx-get="{% url 'pipeline' %}" hx-trigger="load" hx-swap="innerHTML">
                 <h3>Pipeline</h3>

@@ -1,4 +1,3 @@
-from urllib import request
 from core.models import Business, Job, GameState, Player
 from django.shortcuts import render
 import random
@@ -58,8 +57,33 @@ class JobService:
         job.save()
 
     @staticmethod
-    def work_on_job(job):
-        player = Player.objects.get(user=request.user)
+    def pipeline_job(request):
+        jobs = Job.objects.filter(business_id=request.user.player.active_business_id, status='In Progress')
+        
+        context = {
+            'jobs': jobs,
+            'hx_view': 'true',
+        }
 
-        player.current_task = job.job_name
+        return render(request, 'pipeline_items.html', context)
+
+    @staticmethod
+    def work_on_job(player, job):
+        player.current_task = job.job_name + " for " + job.client_name
         player.working_job = job
+        player.save()
+
+    @staticmethod
+    def stop_working_job(player, job):
+        player.current_task = None
+        player.working_job = None
+        player.save()
+
+    @staticmethod
+    def complete_job(business, job):
+        # Add payout to business weekly revenue
+        business.weekly_revenue += job.payout
+        business.save()
+
+        # Delete job from database
+        job.delete()

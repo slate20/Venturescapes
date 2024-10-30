@@ -68,6 +68,7 @@ class Job(models.Model):
     client_name = models.CharField(max_length=255)
     time_worked = models.IntegerField(default=0)
     completion_time = models.IntegerField(default=3) # in-game days (ticks) needed to complete the job
+    progress = models.IntegerField(default=0)
     expiration = models.IntegerField(default=3) # ticks until job is no longer available (later implementation will have ai competitors pick these up)
     deadline = models.IntegerField() # in-game date that the job is due
     payout = models.IntegerField() # amount of money earned once completed
