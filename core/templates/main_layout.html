@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block page %}
+<div class="top-bar" id="top-bar" hx-get="/core/top_bar" hx-trigger="load, every 10s, task-change from:body" hx-swap="innerHTML"></div>
+<div class="ui">
+    <div class="sidebar">
+        <h2>{{ request.user.player.active_business_id.business_name }}</h2>
+        <h5>Rank: {{ request.user.player.active_business_id.rank }} / 5</h5>
+        <ul>
+            <li id="dashboard-parent">
+                <a href="#" class="parent-link">Dashboard</a>
+                <ul class="nested-nav show">
+                    <li><button class="child-link active" hx-get="/core/dashboard" hx-swap="innerHTML" hx-target="#content">Overview</button></li>
+                    <li><button class="child-link" hx-get="/core/opportunities" hx-swap="innerHTML" hx-target="#content">Opportunities</button></li>
+                </ul>
+            </li>
+            <li id="finances-parent"><a href="#" class="parent-link">Finances</a></li>
+            <li id="marketing-parent"><a href="#" class="parent-link">Marketing</a></li>
+            <li id="hr-parent"><a href="#" class="parent-link">HR</a></li>
+            <li id="rd-parent"><a href="#" class="parent-link">R&D</a></li>
+            <li id="operations-parent"><a href="#" class="parent-link">Operations</a></li>
+            <li id="assets-parent"><a href="#" class="parent-link">Assets</a></li>
+        </ul>
+        <form method="post" action="/core/logout/">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+    <div class="content" id="content" hx-get="/core/dashboard" hx-swap="innerHTML" hx-trigger="load"></div>
+</div>
+<script>
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('parent-link')) {
+            e.preventDefault();
+            const parentLi = e.target.closest('li');
+            const nestedNav = parentLi.querySelector('.nested-nav');
+            
+            // Toggle the visibility of the clicked parent's nested-nav
+            nestedNav.classList.toggle('show');
+        }
+    });
+    
+    document.body.addEventListener('htmx:afterRequest', function(evt) {
+        if (evt.detail.elt.classList.contains('child-link')) {
+            // Remove active class from all child links
+            document.querySelectorAll('.child-link').forEach(link => link.classList.remove('active'));
+            
+            // Add active class to the clicked child link
+            evt.detail.elt.classList.add('active');
+        }
+    });
+</script>
+{% endblock %}

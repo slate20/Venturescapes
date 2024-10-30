@@ -1,0 +1,72 @@
+{% load humanize %}
+<div class="opportunities">
+    <div class="header">
+        <h1>Opportunities</h1>
+    </div>
+    <div class="opportunities-window">
+        <div class="opportunities-grid">
+            <!-- Left Column: Direct Requests & Marketplace Jobs -->
+            <div class="left-column">
+                <div class="card direct-requests" id="direct-requests">
+                    <h3>Direct Requests</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Job Type</th>
+                                <th>Payout</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for job in direct_requests %}
+                            <tr hx-get="{% url 'get_job_details' job.job_id %}"
+                                hx-target="#selected-job-details"
+                                hx-trigger="click"
+                                class="job-row">
+                                <td>{{ job.client_name }}</td>
+                                <td>{{ job.job_name }}</td>
+                                <td>${{ job.payout|intcomma }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="3">No direct requests available at this time.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card marketplace-jobs">
+                    <h3>Marketplace Jobs</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Job Type</th>
+                                <th>Budget Range</th>
+                                <th>Deadline</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mobile App</td>
+                                <td>${{ 15000|intcomma }} - ${{ 20000|intcomma }}</td>
+                                <td>30 days</td>
+                            </tr>
+                            <tr>
+                                <td>SEO Optimization</td>
+                                <td>${{ 5000|intcomma }} - ${{ 8000|intcomma }}</td>
+                                <td>45 days</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Right Column: Selected Job Details (Full Height) -->
+            <div class="card selected-job-details full-height" id="selected-job-details">
+                <h3>Selected Job Details</h3>
+                <p>Select a job to view details.</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block page %}
+<div id="auth-form">
+    <h1>Login</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <button type="submit" hx-get="/core/register/" hx-target="#auth-form">Register</button>
+</div>
+{% endblock %}
