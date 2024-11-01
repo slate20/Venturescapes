@@ -1,0 +1,5 @@
+{% load humanize %}
+<h3>Weekly Summary</h3>
+<p>Projected Revenue: ${{ request.user.player.active_business_id.weekly_revenue|intcomma }}</p>
+<p>Projected Expenses: ${{ request.user.player.active_business_id.weekly_expenses|intcomma }}</p>
+<p>Projected Net Profit: ${{ request.user.player.active_business_id.weekly_profit|intcomma }}</p>

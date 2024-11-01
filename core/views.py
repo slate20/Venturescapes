@@ -40,6 +40,10 @@ def top_bar(request):
 def dashboard(request):
     return render(request, 'dashboard.html')
 
+@login_required
+def weekly_summary(request):
+    return render(request, 'weekly_summary.html')
+
 def biz_setup(request):
     return BusinessService.new_business_setup(request)
         
@@ -125,5 +129,5 @@ def complete_job(request, job_id):
     JobService.complete_job(business, job)
 
     response = JobService.pipeline_job(request)
-    response['HX-Trigger'] = 'task-change'
+    response['HX-Trigger'] = 'job-complete'
     return response
