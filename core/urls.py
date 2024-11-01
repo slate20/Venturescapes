@@ -9,6 +9,7 @@ urlpatterns = [
     path("top_bar/", views.top_bar, name="top_bar"),
     path("biz_setup/", views.biz_setup, name="biz_setup"),
     path("dashboard/", views.dashboard, name="dashboard"),
+    path("weekly_summary/", views.weekly_summary, name="weekly_summary"),
     path("opportunities/", views.opportunities, name="opportunities"),
     path("get_job_details/<int:job_id>/", views.get_job_details, name="get_job_details"),
     path("accept_job/<int:job_id>/", views.accept_job, name="accept_job"),

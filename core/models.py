@@ -88,6 +88,7 @@ class CustomerOrder(models.Model):
 
 class PurchaseOrder(models.Model):
     purchase_order_id = models.AutoField(primary_key=True)
+    order_type = models.CharField(max_length=255, default="Direct") # Direct or Marketplace
     reseller_id = models.IntegerField() # foreign key to reseller
     manufacturer_id = models.IntegerField() # foreign key to manufacturer
     products = models.ManyToManyField('ProductOrder')
