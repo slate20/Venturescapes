@@ -18,7 +18,17 @@
             <li id="marketing-parent"><a href="#" class="parent-link">Marketing</a></li>
             <li id="hr-parent"><a href="#" class="parent-link">HR</a></li>
             <li id="rd-parent"><a href="#" class="parent-link">R&D</a></li>
-            <li id="operations-parent"><a href="#" class="parent-link">Operations</a></li>
+            <li id="operations-parent">
+                <a href="#" class="parent-link">Operations</a>
+                <ul class="nested-nav">
+                    <li><button class="child-link" hx-get="/operations" hx-swap="innerHTML" hx-target="#content">Overview</button></li>
+                    {% if request.user.player.active_business_id.business_type == "Service" %}
+                        <li><button class="child-link" hx-get="/operations/active_jobs" hx-swap="innerHTML" hx-target="#content">Active Jobs</button></li>
+                    {% else %}
+                        <li><button class="child-link" hx-get="/operations/active_orders" hx-swap="innerHTML" hx-target="#content">Active Orders</button></li>
+                    {% endif %}
+                </ul>
+            </li>
             <li id="assets-parent"><a href="#" class="parent-link">Assets</a></li>
         </ul>
         <form method="post" action="/core/logout/">

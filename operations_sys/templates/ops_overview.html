@@ -1,0 +1,15 @@
+{% load humanize %}
+<div class="ops-overview">
+    <div class="header">
+        <h1>Overview</h1>
+    </div>
+    <div class="dash-window">
+        <div class="dashboard-grid">
+            <div class="card business-rank" id="business-rank">
+                <h3>Business Performance</h3>
+                <p>Business Rank: {{ request.user.player.active_business_id.rank }}/5</p>
+                <p>Reputation: {{ request.user.player.active_business_id.reputation }}%</p>
+            </div>
+        </div>
+    </div>
+</div>

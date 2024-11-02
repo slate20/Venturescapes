@@ -62,6 +62,8 @@ TEMPLATES = [
         'DIRS': [
             BASE_DIR / 'core/templates',
             BASE_DIR / 'core/templates/components',
+            BASE_DIR / 'operations_sys/templates',
+            BASE_DIR / 'operations_sys/templates/components',
         ],
         'APP_DIRS': True,
         'OPTIONS': {

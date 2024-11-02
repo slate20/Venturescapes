@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from core import urls as core_urls
+from operations_sys import urls as operations_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('core/', include(core_urls)),
+    path('operations/', include(operations_urls)),
     path('', core_urls.views.login_view, name='login'),
 ]
