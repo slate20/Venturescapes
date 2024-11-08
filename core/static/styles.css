@@ -1,9 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+/* Color Palette */
+:root {
+    --color-background: #ecf0f1;
+    --color-menu-background: #fff;
+    --color-card-background: #fff;
+    --color-text: #fff;
+    --color-text-dark: #222;
+    --color-primary: #2c3e50;
+    --color-primary-light: #34495e;
+    --color-primary-dark: #27282c;
+    --color-secondary: #3498db;
+    --color-secondary-light: #5dade2;
+    --color-secondary-dark: #2980b9;
+    --color-tertiary: #f1c40f;
+    --color-tertiary-light: #f39c12;
+    --color-tertiary-dark: #e67e22;
+    --color-success: #2ecc71;
+    --color-success-light: #27ae60;
+    --color-success-dark: #1e8449;
+    --color-danger: #cf3f2f;
+    --color-danger-light: #ec4835;
+    --color-danger-dark: #b03a2e;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    --color-background: #2b2b2b;
+    --color-menu-background: #1d1d1d;
+    --color-card-background: #333;
+    --color-text: #ffffff;
+    --color-text-dark: #e0e0e0;
+    --color-primary: #34495e;
+    --color-primary-light: #2c3e50;
+    --color-primary-dark: #1a2533;
+    --color-secondary: #3498db;
+    --color-secondary-light: #2980b9;
+    --color-secondary-dark: #1f6da8;
+}
+
+body.dark-mode .sidebar {
+    background-color: var(--color-menu-background);
+}
+
+body.dark-mode .content {
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+body.dark-mode .top-bar {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+}
+
+/* Dark mode toggle */
+.dark-mode-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.dark-mode-toggle label {
+    margin-right: 10px;
+    color: var(--color-text);
+}
+
+#dark-mode-switch {
+    appearance: none;
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#dark-mode-switch::before {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    top: 1px;
+    left: 1px;
+    background-color: white;
+    transition: transform 0.3s;
+}
+
+#dark-mode-switch:checked {
+    background-color: var(--color-secondary);
+}
+
+#dark-mode-switch:checked::before {
+    transform: translateX(20px);
+}
+
+/* Global Styles */
+
+* {
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
-    background-color: #ecf0f1; /* Light gray background */
+    background-color: var(--color-background);
     height: 100vh;
     width: 100vw;
     overflow: hidden;
@@ -19,7 +124,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #27282c; /* Blue */
+    background-color: var(--color-primary-dark);
     color: white;
     height: 24px;
     padding: 0px 20px;
@@ -54,7 +159,7 @@ body {
 .sidebar {
     box-sizing: border-box;
     width: 250px;
-    background-color: #2c3e50; /* Muted navy blue */
+    background-color: var(--color-primary);
     color: white;
     padding: 20px;
     position: relative;
@@ -85,11 +190,11 @@ body {
 }
 
 .sidebar ul li a:hover {
-    background-color: #34495e; /* Slightly lighter navy */
+    background-color: var(--color-primary-light); /* Slightly lighter navy */
 }
 
 .sidebar li button {
-    background-color: #2c3e50; /* Muted navy blue */
+    background-color: transparent; /* Muted navy blue */
     color: white;
     text-align: left;
     width: 100%;
@@ -119,7 +224,7 @@ body {
 
 .sidebar .nested-nav li a {
     font-size: 0.9em; /* Smaller font size for nested items */
-    background-color: #34495e; /* Slightly lighter navy */
+    background-color: var(--color-primary-light); /* Slightly lighter navy */
 }
 
 .main-view {
@@ -133,7 +238,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #fff;
+    background-color: var(--color-menu-background);
     /* border-bottom: 1px solid #ddd; */
 }
 
@@ -156,7 +261,7 @@ body {
     transform: translate(-50%, -50%);
     position: relative;
     height: 90%;
-    background-color: #fff;
+    background-color: var(--color-menu-background);
     border-radius: 8px;
     overflow: hidden;
     padding: 20px;
@@ -171,7 +276,7 @@ body {
 }
 
 .card {
-    background-color: #fff;
+    background-color: var(--color-card-background);
     border-radius: 8px;
     border: #33333317 1px solid;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -199,14 +304,14 @@ body {
 .pipeline-job button {
     padding: 6px;
     border-radius: 5px;
-    background-color: #4866ca;
+    background-color: var(--color-secondary);
     color: white;
     border: none;
     cursor: pointer;
 }
 
 .pipeline-job button:hover {
-    background-color: #5679e9;
+    background-color: var(--color-secondary-light);
 }
 
 .ytd-summary {
@@ -239,7 +344,7 @@ body {
 }
 
 .progress {
-    background-color: #27ae60;
+    background-color: var(--color-secondary-dark);
     height: 20px;
 }
 
@@ -306,7 +411,7 @@ table .job-row:hover {
 }
 
 button.accept-job {
-    background-color: #27ae60;
+    background-color: var(--color-success);
     color: white;
     padding: 10px 20px;
     margin: 5px 0;
@@ -317,7 +422,7 @@ button.accept-job {
 }
 
 button.decline-job {
-    background-color: #e74c3c;
+    background-color: var(--color-danger);
     color: white;
     padding: 10px 20px;
     margin: 5px 0;
@@ -328,20 +433,9 @@ button.decline-job {
 }
 
 button.accept-job:hover {
-    background-color: #2ecc71;
+    background-color: var(--color-success-light);
 }
 
 button.decline-job:hover {
-    background-color: #c0392b;
-}
-
-.progress-bar {
-    background-color: #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.progress {
-    background-color: #2c81b9; /* Muted blue */
-    height: 20px;
+    background-color: var(--color-danger-light);
 }
